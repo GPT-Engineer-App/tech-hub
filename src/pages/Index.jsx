@@ -1,19 +1,48 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Text, Image, Link } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+const sampleProducts = [
+  {
+    id: 1,
+    name: "Smartphone",
+    description: "Latest model with all the new features.",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 2,
+    name: "Laptop",
+    description: "High performance laptop for all your needs.",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 3,
+    name: "Headphones",
+    description: "Noise-cancelling over-ear headphones.",
+    image: "https://via.placeholder.com/150",
+  },
+];
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
-      </VStack>
-    </Container>
+    <Box p={4}>
+      <Heading as="h1" mb={6}>
+        Welcome to E-Shop
+      </Heading>
+      <SimpleGrid columns={[1, 2, 3]} spacing={10}>
+        {sampleProducts.map((product) => (
+          <Box key={product.id} borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
+            <Image src={product.image} alt={product.name} />
+            <Heading as="h3" size="md" mt={4}>
+              {product.name}
+            </Heading>
+            <Text mt={2}>{product.description}</Text>
+            <Link as={RouterLink} to={`/products/${product.id}`} color="teal.500" mt={4} display="block">
+              View Details
+            </Link>
+          </Box>
+        ))}
+      </SimpleGrid>
+    </Box>
   );
 };
 
